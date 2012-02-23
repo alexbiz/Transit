@@ -1,0 +1,36 @@
+<table>
+<% @patients.each do |patient| %>
+
+<tr>
+	<td>
+	<%= link_to "Patient: #{patient.first_name} #{patient.last_name}", 
+				case_patient_path(@case.id, patient.id) %>
+	</td>
+	<% if patient.history_female.nil? && patient.history_male.nil? 	%>
+		<td>
+			No Medical History
+		</td>
+		<td>
+			<% if patient.sex == "Female" %>
+				<%= link_to "Fill out Medical History", new_case_patient_history_female_path(@case.id, patient.id) %>
+			<% elsif patient.sex == "Male" %>
+				<%= link_to "Fill out Medical History", new_case_patient_history_male_path(@case.id, patient.id) %>
+			<% end %>
+		</td>
+	<% else %>
+		<td>
+			<% if patient.sex == "Female" %>
+				<%= link_to "Medical History", case_patient_history_female_path(@case.id, patient.id, patient.history_female.id) %>
+			<% elsif patient.sex == "Male" %>
+				<%= link_to "Medical History", case_patient_history_male_path(@case.id, patient.id, patient.history_male.id) %>
+			<% end %>
+		</td>	
+	<% end %>
+</tr>
+
+<% end %>
+
+</table>
+
+<%= link_to "Add Patient", 
+			new_case_patient_path(@case.id) %>
