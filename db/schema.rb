@@ -63,7 +63,6 @@ ActiveRecord::Schema.define(:version => 20120223172103) do
   create_table "patients", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "case_id"
     t.date     "date_of_birth"
     t.string   "first_name"
     t.string   "last_name"
@@ -71,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20120223172103) do
     t.string   "ethnicity"
     t.string   "marital_status"
     t.string   "occupation"
+    t.integer  "case_id"
   end
 
   create_table "referrers", :force => true do |t|
