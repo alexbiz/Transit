@@ -1,0 +1,13 @@
+<%= link_to "Edit Patient Info", 		
+			edit_case_patient_path(@case.id, @patient) %>
+
+<p>First Name: <%= @patient.first_name %></p>
+
+<p>Last Name: <%= @patient.last_name %></p>
+
+<p>Sex: <%= @patient.sex %></p>
+
+<p>DOB: <%= @patient.date_of_birth %></p>
+
+<%= link_to "Return to Patient Page", 		
+			case_patients_path(@case.id) %>

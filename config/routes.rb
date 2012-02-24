@@ -1,11 +1,20 @@
 Transit::Application.routes.draw do
   resources :users
 	resources :sessions, :only => [:new, :create, :destroy]
-	resources :cases
 	resources :clinicians
 	resources :referrers
 	resources :appointments
 	
+	resources :cases do
+	  resources :patients do
+	    collection do
+	      get 'add'
+      end
+	    resources :history_females
+	    resources :history_males
+    end
+  end
+
 	match '/register', :to => 'users#new'
 	match '/signin', :to => 'sessions#new'
 	match '/signout', :to => 'sessions#destroy'

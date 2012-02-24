@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120216192256) do
+ActiveRecord::Schema.define(:version => 20120223172103) do
 
   create_table "appointments", :force => true do |t|
     t.integer  "case_id"
@@ -31,6 +31,11 @@ ActiveRecord::Schema.define(:version => 20120216192256) do
     t.datetime "updated_at"
   end
 
+  create_table "cases_patients", :id => false, :force => true do |t|
+    t.integer "case_id"
+    t.integer "patient_id"
+  end
+
   create_table "clinicians", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -39,6 +44,33 @@ ActiveRecord::Schema.define(:version => 20120216192256) do
     t.string   "role"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "history_females", :force => true do |t|
+    t.integer  "patient_id"
+    t.integer  "pregnancies"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "history_males", :force => true do |t|
+    t.integer  "patient_id"
+    t.boolean  "prior_infertility"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "patients", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "case_id"
+    t.date     "date_of_birth"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "sex"
+    t.string   "ethnicity"
+    t.string   "marital_status"
+    t.string   "occupation"
   end
 
   create_table "referrers", :force => true do |t|
