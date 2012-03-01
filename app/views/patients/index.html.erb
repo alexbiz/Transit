@@ -1,36 +1,122 @@
-<table>
-<% @patients.each do |patient| %>
+<ul class="patient_index">
+	
+ 	<% @patients.each do |patient| %>
 
-<tr>
-	<td>
-	<%= link_to "Patient: #{patient.first_name} #{patient.last_name}", 
-				case_patient_path(@case.id, patient.id) %>
-	</td>
-	<% if patient.history_female.nil? && patient.history_male.nil? 	%>
-		<td>
-			No Medical History
-		</td>
-		<td>
-			<% if patient.sex == "Female" %>
-				<%= link_to "Fill out Medical History", new_case_patient_history_female_path(@case.id, patient.id) %>
-			<% elsif patient.sex == "Male" %>
-				<%= link_to "Fill out Medical History", new_case_patient_history_male_path(@case.id, patient.id) %>
-			<% end %>
-		</td>
-	<% else %>
-		<td>
-			<% if patient.sex == "Female" %>
-				<%= link_to "Medical History", case_patient_history_female_path(@case.id, patient.id, patient.history_female.id) %>
-			<% elsif patient.sex == "Male" %>
-				<%= link_to "Medical History", case_patient_history_male_path(@case.id, patient.id, patient.history_male.id) %>
-			<% end %>
-		</td>	
+ 		<% if patient.sex == "Female" %>
+			
+			<li>
+			
+				<%= link_to case_patient_path(@case, patient) do |l| %>
+				<span class="left round">
+					<span class="icon female">u</span><br>
+					<h1>Egg Donor/Carrier</h1>
+					</span>
+				<% end %>
+			
+			
+				<span class="middle">				
+					
+				
+					<table>
+						<h1>Information</h1><br>
+						<tr>
+							<td>Name: </td><td><%= "#{patient.last_name}, #{patient.first_name}".to(15) %> </td>
+						</tr>
+						<tr>
+							<td>Gender: </td><td><%= "#{patient.sex}" %> </td>
+						</tr>
+						<tr>
+							<td>DOB: </td><td><%= "#{patient.date_of_birth}" %> </td>
+						</tr>
+					</table>
+				
+				</span>
+				<span class="right">
+					<table>
+						<h1>Status</h1><br>
+					<% if patient.history_female.nil? %>
+						<tr>
+							<td>History: </td><td><%= link_to "Incomplete", new_case_patient_history_female_path(@case.id, patient.id) %></td>
+						</tr>
+					<% else %>
+						<tr>
+							<td>History: </td><td><%= link_to "Complete", case_patient_history_female_path(@case.id, patient.id, patient.history_female.id) %></td>
+						</tr>
+					<% end %>
+						<tr>
+							<td>Insurance: </td><td><%= link_to "Incomplete", "#" %></td>
+						</tr>
+						
+					</table>
+				</span>
+			</li>
+			
+		<% elsif patient.sex == "Male" %>
+
+			<li>
+			
+				<%= link_to case_patient_path(@case, patient) do |l| %>
+				<span class="left round">
+					<span class="icon male">u</span><br>
+					<h1>Sperm Donor</h1>
+				</span>
+				<% end %>
+			
+				<span class="middle">
+					<h1>Information</h1><br>
+					<table>
+						<tr>
+							<td>Name: </td><td><%= "#{patient.last_name}, #{patient.first_name}".to(15) %> </td>
+						</tr>
+						<tr>
+							<td>Gender: </td><td><%= "#{patient.sex}" %> </td>
+						</tr>
+						<tr>
+							<td>DOB: </td><td><%= "#{patient.date_of_birth}" %> </td>
+						</tr>
+					</table>
+				
+				</span>
+				
+				<span class="right">
+					<h1>Status</h1><br>
+					<table>
+					<% if patient.history_male.nil? %>
+						<tr>
+							<td>History: </td><td><%= link_to "Incomplete", new_case_patient_history_male_path(@case.id, patient.id) %></td>
+						</tr>
+					<% else %>
+						<tr>
+							<td>History: </td><td><%= link_to "Complete", case_patient_history_male_path(@case.id, patient.id, patient.history_male.id) %></td>
+						</tr>
+					<% end %>
+						<tr>
+							<td>Insurance: </td><td><%= link_to "Incomplete", "#" %></td>
+						</tr>
+						
+					</table>
+				</span>
+
+			</li>
+
+ 		<% end %>
+
 	<% end %>
-</tr>
 
-<% end %>
+	<li>
 
-</table>
-
-<%= link_to "Add Patient", 
-			new_case_patient_path(@case.id) %>
+		<%= link_to new_case_patient_path(@case.id) do |l| %>
+			<span class="left round">
+				<span class="icon_new">⊕</span><br>
+				<h1>Add Patient</h1>
+			</span>
+		<% end %>
+		
+		<span class="new">
+			<h1>Add new patient to case</h1>
+		</span>
+	
+	</li>		
+			
+</ul>
+			
