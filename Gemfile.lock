@@ -104,7 +104,7 @@ GEM
       rack
     rack-test (0.6.1)
       rack (>= 1.0)
-    rake (0.8.7)
+    rake (13.0.1)
     rdoc (3.11)
       json (~> 1.4)
     rspec (2.6.0)
@@ -165,7 +165,7 @@ DEPENDENCIES
   paperclip
   pg
   rails!
-  rake (= 0.8.7)
+  rake (= 13.0.1)
   rspec-rails (= 2.6.1)
   sass
   sass-rails
