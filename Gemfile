@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 # Bundle edge Rails instead:
 
-gem 'rake', '0.8.7'
+gem 'rake', '13.0.1'
 gem 'sass'
 gem 'gravatar_image_tag', '1.0.0.pre2'
 gem 'will_paginate', '3.0.pre2'
